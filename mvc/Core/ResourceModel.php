@@ -52,7 +52,6 @@ class ResourceModel implements ResourceModelInterface
         $data = $model->getProperties();
         $keys = array_keys($data);
         $data['updated_at']=date('Y-m-d H:i:s');
-        $dataKey = implode(" , ", $keys);
         $str = "";
         foreach ($keys as $key => $value) {
             $str .= $value . " = :" . $value . ",";
