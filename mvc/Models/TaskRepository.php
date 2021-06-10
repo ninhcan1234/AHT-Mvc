@@ -22,11 +22,6 @@ class TaskRepository
         return $this->taskResource->edit($model);
     }
 
-    public function save($model)
-    {
-        return $this->taskResource->save($model);
-    }
-
     public function get($id)
     {
         return $this->taskResource->get($id);

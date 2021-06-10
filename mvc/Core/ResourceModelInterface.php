@@ -5,8 +5,7 @@ namespace MVC\Core;
 interface ResourceModelInterface
 {
     function _init($table, $id, $model);
-    function add($model);
-    function edit($model);
+    function save($model);
     function delete($model);
 
 }
