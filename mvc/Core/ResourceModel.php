@@ -35,34 +35,31 @@ class ResourceModel implements ResourceModelInterface
         return $req->fetch();
 	}
 
-    public function add($model)
-    {
+    public function save($model) 
+    {   
         $data = $model->getProperties();
+        $id = $data[$this->id];
+        (unset)($data[$this->id]);
         $keys = array_keys($data);
         $data['created_at'] = date('Y-m-d H:i:s');
-        $data['updated_at'] = date('Y-m-d H:i:s');
-        $dataKey = implode(" , ", $keys);
-        $dataValue = ":" . implode(" , :", $keys);
-        $sql = "INSERT INTO $this->table ($dataKey) VALUES ($dataValue)";
-		$req = Database::getBdd()->prepare($sql);
-		return $req->execute($data);
-    }
-
-    public function edit($model)
-    {
-        $data = $model->getProperties();
-        $keys = array_keys($data);
         $data['updated_at']=date('Y-m-d H:i:s');
+        $dataKey = implode(" , ", $keys);
         $str = "";
         foreach ($keys as $key => $value) {
             $str .= $value . " = :" . $value . ",";
         }
+        $dataValue = ":" . implode(" , :", $keys);
+        
         $str = substr($str,0,-1);
-        $sql = "UPDATE $this->table SET $str WHERE id = :id";
-		$req = Database::getBdd()->prepare($sql);
+        if(isset($id) && $id == null || $id == "" ) {
+             $sql =  "INSERT INTO $this->table ($dataKey) VALUES ($dataValue)" ;
+        }else{
+            array_push($data,$id);
+            $sql = "UPDATE $this->table SET $str WHERE $this->id = :id";
+        } 
+        $req = Database::getBdd()->prepare($sql);
 		return $req->execute($data);
     }
-     
 
     public function delete($model)
 	{

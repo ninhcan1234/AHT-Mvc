@@ -14,12 +14,12 @@ class TaskRepository
 
     public function add($model)
     {
-        return $this->taskResource->add($model);
+        return $this->taskResource->save($model);
     }
 
     public function edit($model)
     {
-        return $this->taskResource->edit($model);
+        return $this->taskResource->save($model);
     }
 
     public function get($id)
