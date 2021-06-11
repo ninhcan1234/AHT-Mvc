@@ -16,6 +16,7 @@ class ResourceModel implements ResourceModelInterface
         $this->table = $table;
         $this->id = $id;
         $this->model = $model;
+        
     }
 
     public function getAll()
@@ -62,33 +63,6 @@ class ResourceModel implements ResourceModelInterface
 		return $req->execute($data);
     }
      
-    public function save($model) {
-        
-        $data = $model->getProperties();
-        $id = $data[$this->id];
-        unset($data[$this->id]);
-        $keys = array_keys($data);
-        $data['updated_at']=date('Y-m-d H:i:s');
-        $dataKey = implode(" , ", $keys);
-        $str = "";
-        foreach ($keys as $key => $value) {
-            $str .= $value . " = :" . $value . ",";
-        }
-        $dataValue = ":" . implode(" , :", $keys);
-        
-        $str = substr($str,0,-1);
-        if(isset($id) && ($id == null || $id == "")) {
-             // insert
-             $sql =  "INSERT INTO $this->table ($dataKey) VALUES ($dataValue)" ;
-          } else{
-              //update
-              $sql = "UPDATE $this->table  SET $str WHERE $this->id = :$this->id";
-              array_push($data, $id);
-
-          }
-        $req = Database::getBdd()->prepare($sql);
-		return $req->execute($data);
-    }
 
     public function delete($model)
 	{
