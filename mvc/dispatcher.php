@@ -9,7 +9,6 @@ class Dispatcher
 {
     private $request;
 
-    // Navigate to Controller
     public function dispatch()
     {
         $this->request = new Request();
