@@ -9,6 +9,6 @@ class ProductResourceModel extends ResourceModel
 {
     public function __construct()
     {   
-        $this->_init('product', 'id', new ProductModel);
+        parent::_init('product', 'id', new ProductModel);
     }
 }

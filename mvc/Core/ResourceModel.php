@@ -11,12 +11,11 @@ class ResourceModel implements ResourceModelInterface
     protected $id;
     protected $model;
 
-    public function _init($table, $id, $model)
+    public function _init($table, $id, $model) 
     {
         $this->table = $table;
         $this->id = $id;
         $this->model = $model;
-        
     }
 
     public function getAll()
@@ -24,22 +23,21 @@ class ResourceModel implements ResourceModelInterface
         $sql = "SELECT * FROM $this->table";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
-        return $req->fetchAll(PDO::FETCH_OBJ);
+        return $req->fetchAll(PDO::FETCH_CLASS, get_class($this->model));
     }
 
     public function get($id)
     {
-		$sql = "SELECT * FROM $this->table WHERE id =" . $id;
+		$sql = "SELECT * FROM $this->table WHERE $this->id =" . $id;
         $req = Database::getBdd()->prepare($sql);
-        $req->execute();
-        return $req->fetch();
+        $req->execute([$this->id=>$id]);
+        return $req->fetchObject(get_class($this->model));
 	}
 
     public function save($model) 
     {   
         $data = $model->getProperties();
         $id = $data[$this->id];
-        (unset)($data[$this->id]);
         $keys = array_keys($data);
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at']=date('Y-m-d H:i:s');
@@ -52,9 +50,8 @@ class ResourceModel implements ResourceModelInterface
         
         $str = substr($str,0,-1);
         if(isset($id) && $id == null || $id == "" ) {
-             $sql =  "INSERT INTO $this->table ($dataKey) VALUES ($dataValue)" ;
+            $sql =  "INSERT INTO $this->table ($dataKey) VALUES ($dataValue)" ;
         }else{
-            array_push($data,$id);
             $sql = "UPDATE $this->table SET $str WHERE $this->id = :id";
         } 
         $req = Database::getBdd()->prepare($sql);
@@ -64,7 +61,7 @@ class ResourceModel implements ResourceModelInterface
     public function delete($model)
 	{
         $data['id'] = $model->getId();
-        $sql = "DELETE FROM $this->table WHERE id = :id";
+        $sql = "DELETE FROM $this->table WHERE $this->id = :id";
         $req = Database::getBdd()->prepare($sql);
         return $req->execute($data);
 	}

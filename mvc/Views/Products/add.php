@@ -5,8 +5,8 @@
         <input type="text" class="form-control" id="name" placeholder="Enter a name" name="name">
     </div>
     <div class="form-group">
-        <label for="prince">Product's Prince</label>
-        <input type="text" class="form-control" id="prince" placeholder="Enter a name" name="prince">
+        <label for="price">Product's Prince</label>
+        <input type="text" class="form-control" id="price" placeholder="Enter a name" name="price">
     </div>
     <div class="form-group">
         <label for="description">Description</label>

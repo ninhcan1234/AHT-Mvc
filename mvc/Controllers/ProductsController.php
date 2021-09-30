@@ -22,8 +22,8 @@ class ProductsController extends Controller
             $product = new ProductRepository();
             $productModel = new ProductModel();
             $productModel->setName($_POST["name"]);
-            $productModel->setPrince($_POST["prince"]);
-            $productModel->setDes($_POST["description"]);
+            $productModel->setPrice($_POST["price"]);
+            $productModel->setDescription($_POST["description"]);
             if ($product->add($productModel)) {
                 header("Location: " . WEBROOT . "products/index");
             }
@@ -39,8 +39,8 @@ class ProductsController extends Controller
             $productModel = new ProductModel();
             $productModel->setId($id);
             $productModel->setName($_POST["name"]);
-            $productModel->setPrince($_POST["prince"]);
-            $productModel->setDes($_POST["description"]);
+            $productModel->setPrice($_POST["price"]);
+            $productModel->setDescription($_POST["description"]);
             if ($product->edit($productModel))
             {
                 header("Location: " . WEBROOT . "products/index");

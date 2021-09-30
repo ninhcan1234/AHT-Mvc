@@ -6,7 +6,7 @@
         <tr>
             <th>ID</th>
             <th>Product Name</th>
-            <th>Prince</th>
+            <th>Price</th>
             <th>Description</th>
             <th class="text-center">Action</th>
         </tr>
@@ -15,15 +15,15 @@
         foreach ($product as $product)
         {
             echo '<tr>';
-            echo "<td>" . $product->id . "</td>";
-            echo "<td>" . $product->name . "</td>";
-            echo "<td>" . $product->prince . " $" . "</td>";
-            echo "<td>" . $product->description . "</td>";
+            echo "<td>" . $product->getId() . "</td>";
+            echo "<td>" . $product->getName() . "</td>";
+            echo "<td>" . $product->getPrice() . " $" . "</td>";
+            echo "<td>" . $product->getDescription() . "</td>";
             echo "<td class='text-center'>
-            <a class='btn btn-info btn-xs' href='/mvc/products/edit/" . $product->id . "' >
+            <a class='btn btn-info btn-xs' href='/mvc/products/edit/" . $product->getId() . "' >
                 <span class='glyphicon glyphicon-edit'></span> Edit
             </a> 
-            <a href='/mvc/products/delete/" . $product->id . "' class='btn btn-danger btn-xs'>
+            <a href='/mvc/products/delete/" . $product->getId() . "' class='btn btn-danger btn-xs'>
                 <span class='glyphicon glyphicon-remove'></span> Del
             </a>
             </td>";

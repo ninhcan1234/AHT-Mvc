@@ -8,7 +8,7 @@ class ProductModel extends Model{
 
     protected $id;
     protected $name;
-    protected $prince;
+    protected $price;
     protected $description;
     protected $created_at;
     protected $updated_at;
@@ -33,14 +33,14 @@ class ProductModel extends Model{
          $this->name = $name;
     }
 
-    public function getDes()
+    public function getDescription()
     {
         return $this->description ;
     }
 
-    public function setDes($des)
+    public function setDescription($description)
     {
-         $this->description = $des;
+         $this->description = $description;
     }
 
     public function getCreated_at()
@@ -63,13 +63,13 @@ class ProductModel extends Model{
         $this->updated_at = $time;
     }
 
-    public function getPrince()
+    public function getPrice()
     {
-        return $this->prince;
+        return $this->price;
     }
 
-    public function setPrince($prince)
+    public function setPrice($price)
     {
-        $this->prince = $prince;
+        $this->price = $price;
     }
 }
